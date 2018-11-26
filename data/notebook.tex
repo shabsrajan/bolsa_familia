@@ -1,0 +1,1552 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Predicting-no-shows}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Project: Predicting no
+shows}\label{project-predicting-no-shows}
+
+Author: Shabs Rajasekharan. Report created as part fo the Udacity
+Nanodegree program. Dataset used: No-Show Appointments dataset.
+
+\subsection{Table of Contents}\label{table-of-contents}
+
+Introduction
+
+Data Wrangling
+
+Exploratory Data Analysis
+
+Conclusions
+
+     \#\# Introduction
+
+This dataset collects information from 100k medical appointments in
+Brazil and is focused on the question of whether or not patients show up
+for their appointment. Its original source can be found here:
+https://www.kaggle.com/joniarroba/noshowappointments
+
+Although there is ample contextual information publicly available about
+the larger program from which this dataset was pulled (see context
+below), it is not clear what came first: the question or the data? It is
+very likely that it was the data. This is highlighted here because the
+main question (originally posted on Kaggle) may have been planted
+without considering the data collected to answer it.
+
+\subsection{Main research question: What factors are important for us to
+know in order to predict if a patient will show up for their scheduled
+appointment?}\label{main-research-question-what-factors-are-important-for-us-to-know-in-order-to-predict-if-a-patient-will-show-up-for-their-scheduled-appointment}
+
+    \subsection{Context}\label{context}
+
+The observations in the dataset are part of the Bolsa Família social
+welfare program of the Brazilian government. Bolsa Família provides
+financial aid (income cash transfer) to poor Brazilian families, unders
+specific conditions. The program attempts to both reduce short-term
+poverty by direct cash transfers and fight long-term poverty by
+increasing human capital among the poor through conditional cash
+transfers. About 12 million Brazilian families receive funds from Bolsa
+Família (in 2011, 26\% of the population were covered) and it has been
+mentioned as one factor contributing to the reduction of poverty in
+Brazil, which fell 27.7\% during the first term in the Luiz Inácio Lula
+da Silva administration (2003 - 2011).
+
+Further information on the Bolsa Familia program can be found here:
+https://factsreports.revues.org/1560
+
+    \subsection{About the data file and
+version}\label{about-the-data-file-and-version}
+
+A note is made here about the version of this data. It has been
+manipulated and pre-processed several times by the public on Kaggle.
+This analysis is based on version 6.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Packages I plan to use}
+        \PY{o}{\PYZpc{}} \PY{n}{matplotlib} \PY{n}{inline} 
+        
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{datetime}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        
+        \PY{c+c1}{\PYZsh{}I want to display all the code in a shell, not just the last output}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{interactiveshell} \PY{k}{import} \PY{n}{InteractiveShell}
+        \PY{n}{InteractiveShell}\PY{o}{.}\PY{n}{ast\PYZus{}node\PYZus{}interactivity} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+     \#\# Data structure and general properties
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Load the data}
+        \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/KaggleV2\PYZhy{}May\PYZhy{}2016.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} (110527, 14)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}lets have a look at the first and last lines of data and a random sample}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}       PatientId  AppointmentID Gender          ScheduledDay  \textbackslash{}
+        0  2.987250e+13        5642903      F  2016-04-29T18:38:08Z   
+        1  5.589978e+14        5642503      M  2016-04-29T16:08:27Z   
+        2  4.262962e+12        5642549      F  2016-04-29T16:19:04Z   
+        3  8.679512e+11        5642828      F  2016-04-29T17:29:31Z   
+        4  8.841186e+12        5642494      F  2016-04-29T16:07:23Z   
+        
+                 AppointmentDay  Age      Neighbourhood  Scholarship  Hipertension  \textbackslash{}
+        0  2016-04-29T00:00:00Z   62    JARDIM DA PENHA            0             1   
+        1  2016-04-29T00:00:00Z   56    JARDIM DA PENHA            0             0   
+        2  2016-04-29T00:00:00Z   62      MATA DA PRAIA            0             0   
+        3  2016-04-29T00:00:00Z    8  PONTAL DE CAMBURI            0             0   
+        4  2016-04-29T00:00:00Z   56    JARDIM DA PENHA            0             1   
+        
+           Diabetes  Alcoholism  Handcap  SMS\_received No-show  
+        0         0           0        0             0      No  
+        1         0           0        0             0      No  
+        2         0           0        0             0      No  
+        3         0           0        0             0      No  
+        4         1           0        0             0      No  
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}            PatientId  AppointmentID Gender          ScheduledDay  \textbackslash{}
+        110522  2.572134e+12        5651768      F  2016-05-03T09:15:35Z   
+        110523  3.596266e+12        5650093      F  2016-05-03T07:27:33Z   
+        110524  1.557663e+13        5630692      F  2016-04-27T16:03:52Z   
+        110525  9.213493e+13        5630323      F  2016-04-27T15:09:23Z   
+        110526  3.775115e+14        5629448      F  2016-04-27T13:30:56Z   
+        
+                      AppointmentDay  Age Neighbourhood  Scholarship  Hipertension  \textbackslash{}
+        110522  2016-06-07T00:00:00Z   56   MARIA ORTIZ            0             0   
+        110523  2016-06-07T00:00:00Z   51   MARIA ORTIZ            0             0   
+        110524  2016-06-07T00:00:00Z   21   MARIA ORTIZ            0             0   
+        110525  2016-06-07T00:00:00Z   38   MARIA ORTIZ            0             0   
+        110526  2016-06-07T00:00:00Z   54   MARIA ORTIZ            0             0   
+        
+                Diabetes  Alcoholism  Handcap  SMS\_received No-show  
+        110522         0           0        0             1      No  
+        110523         0           0        0             1      No  
+        110524         0           0        0             1      No  
+        110525         0           0        0             1      No  
+        110526         0           0        0             1      No  
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}            PatientId  AppointmentID Gender          ScheduledDay  \textbackslash{}
+        85010   8.377838e+13        5743569      F  2016-05-30T09:09:06Z   
+        74616   6.579565e+13        5706809      F  2016-05-17T08:52:03Z   
+        25590   4.144474e+11        5644597      F  2016-05-02T08:52:09Z   
+        3966    1.436627e+11        5561975      F  2016-04-08T11:48:11Z   
+        84019   7.859988e+12        5705407      F  2016-05-17T07:10:20Z   
+        105218  3.897142e+14        5740691      F  2016-05-25T15:52:04Z   
+        36699   8.836374e+13        5626175      F  2016-04-27T07:56:19Z   
+        86921   5.471942e+14        5724295      F  2016-05-20T09:19:10Z   
+        76042   5.431535e+12        5637850      F  2016-04-29T07:26:44Z   
+        110213  7.246521e+12        5627640      F  2016-04-27T09:44:00Z   
+        
+                      AppointmentDay  Age   Neighbourhood  Scholarship  Hipertension  \textbackslash{}
+        85010   2016-06-01T00:00:00Z   12  BARRO VERMELHO            0             0   
+        74616   2016-05-19T00:00:00Z   63  JARDIM CAMBURI            0             0   
+        25590   2016-05-10T00:00:00Z    3       REPÚBLICA            0             0   
+        3966    2016-05-04T00:00:00Z   63     MARIA ORTIZ            0             0   
+        84019   2016-05-17T00:00:00Z   79      TABUAZEIRO            0             1   
+        105218  2016-06-01T00:00:00Z   67      MONTE BELO            0             0   
+        36699   2016-05-03T00:00:00Z   32     RESISTÊNCIA            0             0   
+        86921   2016-06-01T00:00:00Z    8    PRAIA DO SUÁ            1             0   
+        76042   2016-05-02T00:00:00Z   25       SÃO PEDRO            0             0   
+        110213  2016-06-02T00:00:00Z   51     MARIA ORTIZ            0             0   
+        
+                Diabetes  Alcoholism  Handcap  SMS\_received No-show  
+        85010          0           0        0             0      No  
+        74616          0           0        0             0      No  
+        25590          0           0        0             1      No  
+        3966           0           0        0             1      No  
+        84019          1           0        0             0      No  
+        105218         0           0        0             1      No  
+        36699          0           0        0             1      No  
+        86921          0           0        0             1      No  
+        76042          0           0        0             1      No  
+        110213         0           0        0             1      No  
+\end{Verbatim}
+            
+    From public descriptions of the data, we know that `ScheduledDay' tells
+us on what day the patient set up their appointment. `Neighborhood'
+indicates the location of the hospital. `Scholarship' indicates whether
+or not the patient is enrolled in Brasilian welfare program Bolsa
+Família.
+
+The last column: it says `No' if the patient showed up to their
+appointment, and `Yes' if they did not show up.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Are there any missing or NaN values? }
+        \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PatientId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}           PatientId  AppointmentID            Age    Scholarship  \textbackslash{}
+        count  1.105270e+05   1.105270e+05  110527.000000  110527.000000   
+        mean   1.474963e+14   5.675305e+06      37.088874       0.098266   
+        std    2.560949e+14   7.129575e+04      23.110205       0.297675   
+        min    3.921784e+04   5.030230e+06      -1.000000       0.000000   
+        25\%    4.172614e+12   5.640286e+06      18.000000       0.000000   
+        50\%    3.173184e+13   5.680573e+06      37.000000       0.000000   
+        75\%    9.439172e+13   5.725524e+06      55.000000       0.000000   
+        max    9.999816e+14   5.790484e+06     115.000000       1.000000   
+        
+                Hipertension       Diabetes     Alcoholism        Handcap  \textbackslash{}
+        count  110527.000000  110527.000000  110527.000000  110527.000000   
+        mean        0.197246       0.071865       0.030400       0.022248   
+        std         0.397921       0.258265       0.171686       0.161543   
+        min         0.000000       0.000000       0.000000       0.000000   
+        25\%         0.000000       0.000000       0.000000       0.000000   
+        50\%         0.000000       0.000000       0.000000       0.000000   
+        75\%         0.000000       0.000000       0.000000       0.000000   
+        max         1.000000       1.000000       1.000000       4.000000   
+        
+                SMS\_received  
+        count  110527.000000  
+        mean        0.321026  
+        std         0.466873  
+        min         0.000000  
+        25\%         0.000000  
+        50\%         0.000000  
+        75\%         1.000000  
+        max         1.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 110527 entries, 0 to 110526
+Data columns (total 14 columns):
+PatientId         110527 non-null float64
+AppointmentID     110527 non-null int64
+Gender            110527 non-null object
+ScheduledDay      110527 non-null object
+AppointmentDay    110527 non-null object
+Age               110527 non-null int64
+Neighbourhood     110527 non-null object
+Scholarship       110527 non-null int64
+Hipertension      110527 non-null int64
+Diabetes          110527 non-null int64
+Alcoholism        110527 non-null int64
+Handcap           110527 non-null int64
+SMS\_received      110527 non-null int64
+No-show           110527 non-null object
+dtypes: float64(1), int64(8), object(5)
+memory usage: 11.8+ MB
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} 110527
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} PatientId         0
+        AppointmentID     0
+        Gender            0
+        ScheduledDay      0
+        AppointmentDay    0
+        Age               0
+        Neighbourhood     0
+        Scholarship       0
+        Hipertension      0
+        Diabetes          0
+        Alcoholism        0
+        Handcap           0
+        SMS\_received      0
+        No-show           0
+        dtype: int64
+\end{Verbatim}
+            
+    According to the following blocks of results above, there are no NaN or
+missing values. Here the count value is the same as that in the shape
+output, meanign there are no missing values and also there are no NaN
+values according to the isnull function output.
+
+    \subsubsection{Data Cleaning: data types, outliers and other
+anomalies}\label{data-cleaning-data-types-outliers-and-other-anomalies}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} In the previous section, it was clear that there may be some strings that should be in other formats}
+        \PY{c+c1}{\PYZsh{} let\PYZsq{}s check out the data types once more}
+        \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} PatientId         float64
+        AppointmentID       int64
+        Gender             object
+        ScheduledDay       object
+        AppointmentDay     object
+        Age                 int64
+        Neighbourhood      object
+        Scholarship         int64
+        Hipertension        int64
+        Diabetes            int64
+        Alcoholism          int64
+        Handcap             int64
+        SMS\_received        int64
+        No-show            object
+        dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Patient ID would be better as a number rather than an exponential. }
+        \PY{c+c1}{\PYZsh{} This will not affect analysis but it will make reading the data easier}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PatientId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PatientId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PatientId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dtype}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} dtype('int64')
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}          PatientId  AppointmentID Gender          ScheduledDay  \textbackslash{}
+        0   29872499824296        5642903      F  2016-04-29T18:38:08Z   
+        1  558997776694438        5642503      M  2016-04-29T16:08:27Z   
+        2    4262962299951        5642549      F  2016-04-29T16:19:04Z   
+        3     867951213174        5642828      F  2016-04-29T17:29:31Z   
+        4    8841186448183        5642494      F  2016-04-29T16:07:23Z   
+        
+                 AppointmentDay  Age      Neighbourhood  Scholarship  Hipertension  \textbackslash{}
+        0  2016-04-29T00:00:00Z   62    JARDIM DA PENHA            0             1   
+        1  2016-04-29T00:00:00Z   56    JARDIM DA PENHA            0             0   
+        2  2016-04-29T00:00:00Z   62      MATA DA PRAIA            0             0   
+        3  2016-04-29T00:00:00Z    8  PONTAL DE CAMBURI            0             0   
+        4  2016-04-29T00:00:00Z   56    JARDIM DA PENHA            0             1   
+        
+           Diabetes  Alcoholism  Handcap  SMS\_received No-show  
+        0         0           0        0             0      No  
+        1         0           0        0             0      No  
+        2         0           0        0             0      No  
+        3         0           0        0             0      No  
+        4         1           0        0             0      No  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} change the data types of ScheduledDay and AppointmentDay to datetime.}
+        \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{datetime}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AppointmentDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AppointmentDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ScheduledDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ScheduledDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Something to note: max age of 115, min age of \PYZhy{}1? See output of df.describe above}
+         \PY{c+c1}{\PYZsh{} I wonder how many more centenarians there are and whether this is an outlier...well, }
+         \PY{c+c1}{\PYZsh{} the negative person certainly is...unless they considered a fetus. let\PYZsq{}s do some queries}
+         \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age \PYZgt{}= 100}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}               PatientId  AppointmentID Gender        ScheduledDay  \textbackslash{}
+         58014   976294799775439        5651757      F 2016-05-03 09:14:53   
+         63912    31963211613981        5700278      F 2016-05-16 09:17:44   
+         63915    31963211613981        5700279      F 2016-05-16 09:17:44   
+         68127    31963211613981        5562812      F 2016-04-08 14:29:17   
+         76284    31963211613981        5744037      F 2016-05-30 09:44:51   
+         79270     9739429797896        5747809      M 2016-05-30 16:21:56   
+         79272     9739429797896        5747808      M 2016-05-30 16:21:56   
+         90372      234283596548        5751563      F 2016-05-31 10:19:49   
+         92084    55783129426615        5670914      F 2016-05-06 14:55:36   
+         97666   748234579244724        5717451      F 2016-05-19 07:57:56   
+         108506     393964189799        5721152      F 2016-05-19 15:32:09   
+         
+                AppointmentDay  Age    Neighbourhood  Scholarship  Hipertension  \textbackslash{}
+         58014      2016-05-03  102        CONQUISTA            0             0   
+         63912      2016-05-19  115       ANDORINHAS            0             0   
+         63915      2016-05-19  115       ANDORINHAS            0             0   
+         68127      2016-05-16  115       ANDORINHAS            0             0   
+         76284      2016-05-30  115       ANDORINHAS            0             0   
+         79270      2016-05-31  100       TABUAZEIRO            0             0   
+         79272      2016-05-31  100       TABUAZEIRO            0             0   
+         90372      2016-06-02  102      MARIA ORTIZ            0             0   
+         92084      2016-06-03  100  ANTÔNIO HONÓRIO            0             0   
+         97666      2016-06-03  115         SÃO JOSÉ            0             1   
+         108506     2016-06-01  100          MARUÍPE            0             0   
+         
+                 Diabetes  Alcoholism  Handcap  SMS\_received No-show  
+         58014          0           0        0             0      No  
+         63912          0           0        1             0     Yes  
+         63915          0           0        1             0     Yes  
+         68127          0           0        1             0     Yes  
+         76284          0           0        1             0      No  
+         79270          0           0        1             0      No  
+         79272          0           0        1             0      No  
+         90372          0           0        0             0      No  
+         92084          0           0        0             1      No  
+         97666          0           0        0             1      No  
+         108506         0           0        0             0      No  
+\end{Verbatim}
+            
+    There are 7 people over the age of 100, five of whom are 115. These
+could be duplicates because the 100 and 102 year olds may indeed be
+correct. The author has decided to leave the centenarians as correct but
+have a closer look at the 155 yr old. On closer inspection, it looks as
+though there are duplicates in the dataset. For example, row 63912 and
+63915 look like duplicates created at the point of registration
+(probably a call center error?) Two appointments have been created for
+the same person: the patientID AND ScheduledDay are the same. The
+Appointment ID is different.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} How many duplicates in total?}
+         \PY{n+nb}{sum}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{n}{subset} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PatientId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ScheduledDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Have a look at all the duplicates with their originals.}
+         \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{n}{subset}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PatientId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ScheduledDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{keep} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{;}
+\end{Verbatim}
+
+
+    A look through the data suggests that entries can be removed based on
+appointmentID, which in each case is different. On the other hand, in
+several duplicate observations, the SMS\_recieved is distinct. In some
+cases, a text was recieved, in some they weren't. It looks almost as if
+the duplication was created as a response to the text message. However,
+its not the case for all of them. There are duplications were neither
+observation has recorded the SMS being recieved. And a quick glance
+shows that not all the SMS being recieved has had an impact on no-show.
+In rows 110417 and 110420, although the patient recieved an SMS there
+was a no show while she showed up forthe one with the error.
+
+Also, it is not clear to the author why row 367 has been filtered above.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} How about the negative age?}
+         \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age == \PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}              PatientId  AppointmentID Gender        ScheduledDay  \textbackslash{}
+         99832  465943158731293        5775010      F 2016-06-06 08:58:13   
+         
+               AppointmentDay  Age Neighbourhood  Scholarship  Hipertension  Diabetes  \textbackslash{}
+         99832     2016-06-06   -1         ROMÃO            0             0         0   
+         
+                Alcoholism  Handcap  SMS\_received No-show  
+         99832           0        0             0      No  
+\end{Verbatim}
+            
+    The author has decided to leave the negative age in as a possible error
+only in age and not in the observation data itself.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Sort the dataset first (so that SMS comes last) then drop the first. This assumes that the first recodring}
+         \PY{c+c1}{\PYZsh{} of the patient registration is false. }
+         \PY{n}{df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PatientId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{n}{subset}\PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PatientId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ScheduledDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{keep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{last}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} (109193, 14)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Store the data so it can be used later without having to go through all the manipulations again}
+         \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/noShow\PYZus{}clean.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+     \#\# Exploratory Data Analysis
+
+The main question to be answered in the no-show data set is: "What
+factors are important for us to know in order to predict if a patient
+will show up for their scheduled appointment?" As a predictive model
+will not be created here at this time, the research question is divided
+into the preliminary analysis required before creating a predictive
+model.
+
+\subsubsection{Research question 1: What factors are highly correlated
+to
+outcome?}\label{research-question-1-what-factors-are-highly-correlated-to-outcome}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} read in the sorted data and make sure its all ok}
+         \PY{n}{nosho} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/noShow\PYZus{}clean.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} check to see it\PYZsq{}s all ok}
+         \PY{n}{nosho}\PY{o}{.}\PY{n}{shape}
+         \PY{n}{nosho}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+         \PY{n}{nosho}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} (109193, 14)
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}    PatientId  AppointmentID Gender         ScheduledDay       AppointmentDay  \textbackslash{}
+         0      39217        5751990      F  2016-05-31 10:56:41  2016-06-03 00:00:00   
+         1      43741        5760144      M  2016-06-01 14:22:58  2016-06-01 00:00:00   
+         2      93779        5712759      F  2016-05-18 09:12:29  2016-05-18 00:00:00   
+         3     141724        5637648      M  2016-04-29 07:13:36  2016-05-02 00:00:00   
+         4     537615        5637728      F  2016-04-29 07:19:57  2016-05-06 00:00:00   
+         
+            Age   Neighbourhood  Scholarship  Hipertension  Diabetes  Alcoholism  \textbackslash{}
+         0   44    PRAIA DO SUÁ            0             0         0           0   
+         1   39     MARIA ORTIZ            0             0         1           0   
+         2   33          CENTRO            0             0         0           0   
+         3   12  FORTE SÃO JOÃO            0             0         0           0   
+         4   14  FORTE SÃO JOÃO            0             0         0           0   
+         
+            Handcap  SMS\_received No-show  
+         0        0             0      No  
+         1        0             0      No  
+         2        0             0      No  
+         3        0             0      No  
+         4        0             1      No  
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} PatientId          int64
+         AppointmentID      int64
+         Gender            object
+         ScheduledDay      object
+         AppointmentDay    object
+         Age                int64
+         Neighbourhood     object
+         Scholarship        int64
+         Hipertension       int64
+         Diabetes           int64
+         Alcoholism         int64
+         Handcap            int64
+         SMS\_received       int64
+         No-show           object
+         dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} looks like the data types from before weren\PYZsq{}t preserved. }
+         \PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AppointmentDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AppointmentDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ScheduledDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ScheduledDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{} To do any correlations the categorical variables must first be changed to dummies. }
+         \PY{c+c1}{\PYZsh{} This is not always recommended when attempting predictive analysis but as this is just to look at correlations,}
+         \PY{c+c1}{\PYZsh{} it shouldn\PYZsq{}t matter too much}
+         \PY{n}{nosho} \PY{o}{=} \PY{n}{nosho}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{nosho} \PY{o}{=} \PY{n}{nosho}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZhy{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{nosho}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} note that now the dataset contains four extra columns. No\PYZhy{}show has been split into Yes (failed to attend) }
+         \PY{c+c1}{\PYZsh{} and No (attended), and Gender into M and F. }
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:}    PatientId  AppointmentID Gender        ScheduledDay AppointmentDay  Age  \textbackslash{}
+         0      39217        5751990      F 2016-05-31 10:56:41     2016-06-03   44   
+         1      43741        5760144      M 2016-06-01 14:22:58     2016-06-01   39   
+         2      93779        5712759      F 2016-05-18 09:12:29     2016-05-18   33   
+         3     141724        5637648      M 2016-04-29 07:13:36     2016-05-02   12   
+         4     537615        5637728      F 2016-04-29 07:19:57     2016-05-06   14   
+         5    5628261        5680449      M 2016-05-10 11:58:18     2016-05-13   13   
+         6   11831856        5718578      M 2016-05-19 09:42:07     2016-05-19   16   
+         7   22638656        5715081      F 2016-05-18 13:37:12     2016-06-08   23   
+         8   22638656        5580835      F 2016-04-14 07:23:30     2016-05-03   22   
+         9   52168938        5607220      F 2016-04-20 11:22:15     2016-05-17   28   
+         
+              Neighbourhood  Scholarship  Hipertension  Diabetes  Alcoholism  Handcap  \textbackslash{}
+         0     PRAIA DO SUÁ            0             0         0           0        0   
+         1      MARIA ORTIZ            0             0         1           0        0   
+         2           CENTRO            0             0         0           0        0   
+         3   FORTE SÃO JOÃO            0             0         0           0        0   
+         4   FORTE SÃO JOÃO            0             0         0           0        0   
+         5   PARQUE MOSCOSO            0             0         0           0        0   
+         6    SANTO ANTÔNIO            0             0         0           0        0   
+         7       INHANGUETÁ            0             0         0           0        0   
+         8       INHANGUETÁ            0             0         0           0        0   
+         9  JARDIM DA PENHA            0             0         0           0        0   
+         
+            SMS\_received No-show  F  M  No  Yes  
+         0             0      No  1  0   1    0  
+         1             0      No  0  1   1    0  
+         2             0      No  1  0   1    0  
+         3             0      No  0  1   1    0  
+         4             1      No  1  0   1    0  
+         5             0     Yes  0  1   0    1  
+         6             0      No  0  1   1    0  
+         7             1      No  1  0   1    0  
+         8             1      No  1  0   1    0  
+         9             0      No  1  0   1    0  
+\end{Verbatim}
+            
+    Before doing any correlations, it is important to see how the outcome
+itself is distributed. In particular, bias needs to be ascertained in
+the dataset.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s have a look at distribution frequencies using crosstab to tally counts}
+         \PY{c+c1}{\PYZsh{} first how many no\PYZhy{}shows and show\PYZsq{}s are there?}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+         \PY{n}{nosho\PYZus{}table} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{crosstab}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n}{nosho}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No\PYZhy{}show}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{nosho\PYZus{}table}
+         \PY{n}{nosho\PYZus{}table}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 1: Number of attendance and cancellations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{;}
+         \PY{n}{txt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Figure 1: This figure shows the total numbers of attendance and cancellations across the dataset}\PY{l+s+s2}{\PYZdq{}}\PY{p}{;}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{o}{.}\PY{l+m+mi}{005}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{01}\PY{p}{,} \PY{n}{txt}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{,} \PY{n}{wrap} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<matplotlib.figure.Figure at 0x10dbf5dd8>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Figure 1 shows the total numbers of attendance and cancellations across
+the dataset. From this it can be noted that there will be a bias in this
+dataset and that it will impact any correlations and regressions
+attempted with the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s have a look at some quick visual histograms. }
+         \PY{c+c1}{\PYZsh{} Most of the variables here are categorical but a histogram of age can be plotted}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+         \PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 2: Age distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{;}
+         \PY{n}{txt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Figure 2: This figure shows age distribution and it looks right skewed.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{;}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{001}\PY{p}{,} \PY{n}{txt}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{,} \PY{n}{wrap} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The Age distribution shown in the figure above is right skewed
+(positively skewed) and the mean is probably to the right of the median.
+This means that the sample sizes are larger for ages 0-18 and 35-50,
+than for the older ages. This needs to be taken into account before
+drawing conclusions on correlation
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{c+c1}{\PYZsh{} verifing distribution on a boxplot: positive skewness}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+         \PY{n}{nosho}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{vert} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 3: Age distribution showing skewness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{txt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Figure 3: This is a horizontal boxplot of age distribution and it complements figure 1 to show a right skewed distribution.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{;}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{001}\PY{p}{,} \PY{n}{txt}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{,} \PY{n}{wrap} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Figure 3 complements figure 2. It shows the right skewed or positive
+skewness of the age, where the mean is very likely to the right of the
+median. This means that the sample sizes are much larger in the younger
+ages rather than in the older ones and needs ot be taken into account
+before drawing conculsions on correlations
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{c+c1}{\PYZsh{}correlation between age and attendance}
+         \PY{n}{nosho}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:}           Age       Yes        No
+         Age  1.000000 -0.060768  0.060768
+         Yes -0.060768  1.000000 -1.000000
+         No   0.060768 -1.000000  1.000000
+\end{Verbatim}
+            
+    The table above shows that there is little correlation between age,
+attendance and non-attendance. The p-coefficient when using Pearson
+Correlation should be around 0.7 or higher to be considered significant*
+(See note in conclusion on using this statistical method with
+categorical date)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{} It may be more interesting to cut the ages and see if there is any correlation}
+         \PY{n}{bins} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{45}\PY{p}{,} \PY{l+m+mi}{55}\PY{p}{,} \PY{l+m+mi}{65}\PY{p}{,} \PY{l+m+mi}{75}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{]}
+         \PY{n}{age\PYZus{}groups} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0\PYZhy{}18}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{18\PYZhy{}30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{30\PYZhy{}45}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{45\PYZhy{}55}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{55\PYZhy{}65}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{65\PYZhy{}75}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{75+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age\PYZus{}groups}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{age\PYZus{}groups}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{c+c1}{\PYZsh{} let\PYZsq{}s have a quick look at counts and head, to check that everything binned ok}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age\PYZus{}groups}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{nosho}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}80}]:} 0-18     25040
+         30-45    21601
+         18-30    16536
+         45-55    15237
+         55-65    14050
+         65-75     7851
+         75+       5347
+         Name: age\_groups, dtype: int64
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}80}]:}    PatientId  AppointmentID Gender        ScheduledDay AppointmentDay  Age  \textbackslash{}
+         0      39217        5751990      F 2016-05-31 10:56:41     2016-06-03   44   
+         1      43741        5760144      M 2016-06-01 14:22:58     2016-06-01   39   
+         2      93779        5712759      F 2016-05-18 09:12:29     2016-05-18   33   
+         3     141724        5637648      M 2016-04-29 07:13:36     2016-05-02   12   
+         4     537615        5637728      F 2016-04-29 07:19:57     2016-05-06   14   
+         
+             Neighbourhood  Scholarship  Hipertension  Diabetes  Alcoholism  Handcap  \textbackslash{}
+         0    PRAIA DO SUÁ            0             0         0           0        0   
+         1     MARIA ORTIZ            0             0         1           0        0   
+         2          CENTRO            0             0         0           0        0   
+         3  FORTE SÃO JOÃO            0             0         0           0        0   
+         4  FORTE SÃO JOÃO            0             0         0           0        0   
+         
+            SMS\_received No-show  F  M  No  Yes age\_groups  
+         0             0      No  1  0   1    0      30-45  
+         1             0      No  0  1   1    0      30-45  
+         2             0      No  1  0   1    0      30-45  
+         3             0      No  0  1   1    0       0-18  
+         4             1      No  1  0   1    0       0-18  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{c+c1}{\PYZsh{} now let\PYZsq{}s group the data within ages and see if any conclusions can be drawn}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+         \PY{n}{nosho\PYZus{}ages} \PY{o}{=} \PY{n}{nosho}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age\PYZus{}groups}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+         \PY{n}{nosho\PYZus{}ages}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{stacked}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 4: Observations by age groups}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}\PY{p}{;}
+         \PY{n}{txt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Figure 4: This is a stacked bar graph showing distribution of age groups.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{;}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{txt}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{,} \PY{n}{wrap} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{;}
+         \PY{n}{nosho\PYZus{}ages}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x10f169898>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:} <matplotlib.text.Text at 0x10db3a320>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:} <matplotlib.text.Text at 0x10e9afba8>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:} <matplotlib.text.Text at 0x10e64a400>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:}                  No     Yes
+         age\_groups                 
+         0-18        19433.0  5607.0
+         18-30       12473.0  4063.0
+         30-45       17036.0  4565.0
+         45-55       12463.0  2774.0
+         55-65       11860.0  2190.0
+         65-75        6670.0  1181.0
+         75+          4497.0   850.0
+\end{Verbatim}
+            
+    
+    \begin{verbatim}
+<matplotlib.figure.Figure at 0x10db43a58>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Figure 4 is a stacked bar graph that shows age distribution according to
+groups. It also shows the attendance and no-attendance figures. It could
+be concluded from the graph that the younger age groups are more likely
+to cancel attendanc ebut it must be noted that the sample size is much
+larger in these groups and distribution skewed as was seen in figures 1
+and 2. The table above the figure displays the counts in each age group
+and supports the remark on sample sizes
+
+    It will be interesting to see if gender has an impact in attendance.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{c+c1}{\PYZsh{} Find the total counts of male and female}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+         \PY{n}{nosho\PYZus{}mf} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{crosstab}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n}{nosho}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{nosho\PYZus{}mf}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 5: Gender mix}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{;}
+         \PY{n}{txt} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Figure 5: This is a bar graph showing total gender mix}\PY{l+s+s2}{\PYZdq{}}\PY{p}{;}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{txt}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{,} \PY{n}{wrap} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<matplotlib.figure.Figure at 0x10e1705f8>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Figure 5 is a bar graph showing total gender mix. Again, it is important
+to see here that the sample size for females is greater than males and
+this needs to be taken into account when drawing any conclusions on
+corrleations
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{c+c1}{\PYZsh{} gender, age and attendance}
+         \PY{n}{nosho}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:}           Age         F         M       Yes
+         Age  1.000000  0.107164 -0.107164 -0.060768
+         F    0.107164  1.000000 -1.000000  0.004807
+         M   -0.107164 -1.000000  1.000000 -0.004807
+         Yes -0.060768  0.004807 -0.004807  1.000000
+\end{Verbatim}
+            
+    In the table above, it can be concluded that there is no correlation
+between gender and non-attendance. On the other hand, it must be noted
+that there is a larger sample size of females in the dataset, so any
+kind of conclusion drawn comes with a bias
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{c+c1}{\PYZsh{} correlation between SMS reminders and attendance}
+         \PY{n}{nosho}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMS\PYZus{}received}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:}               SMS\_received       Yes
+         SMS\_received      1.000000  0.128601
+         Yes               0.128601  1.000000
+\end{Verbatim}
+            
+    The table shows that there is no correlation between receiving a text
+and attendance which is surprising indeed: as the author expected this
+to show some correlation. In some countries (eg. the UK), text reminders
+have worked to increase attendance. However, in other countries such as
+the Netherlands, the same experiment failed to make any difference to
+attendance rates.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{c+c1}{\PYZsh{} Is chronic illness correlated to no\PYZhy{}show? }
+         \PY{n}{nosho}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hipertension}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Diabetes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alcoholism}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Handcap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:}               Hipertension  Diabetes  Alcoholism   Handcap       Yes
+         Hipertension      1.000000  0.432652    0.087614  0.080345 -0.035752
+         Diabetes          0.432652  1.000000    0.018704  0.058284 -0.014210
+         Alcoholism        0.087614  0.018704    1.000000  0.002339 -0.000644
+         Handcap           0.080345  0.058284    0.002339  1.000000 -0.006024
+         Yes              -0.035752 -0.014210   -0.000644 -0.006024  1.000000
+\end{Verbatim}
+            
+    Admittedly, the above table is included for thoroughness. The author did
+not expect to see any correlations here. Chronic illness may affect the
+speed in recieving an appointment but it is unlikely to affect
+attendance rates.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{c+c1}{\PYZsh{} Does being in the Bolsa Social mean they were more likely to attend?}
+         \PY{n}{nosho}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scholarship}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:}              Scholarship        No
+         Scholarship     1.000000 -0.029457
+         No             -0.029457  1.000000
+\end{Verbatim}
+            
+    The table above shows that scholarship has no correlation to the
+attendance rates either. the author cannot draw any conculsions from
+this because the context surrounding data collection is unknown: where
+members of the Bolsa Familia program randomly picked? Was this an
+experiment to see who would attend: those with financial aid or those
+without?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{c+c1}{\PYZsh{}Neighborhoods should be interesting as well}
+         \PY{n}{neighborhoods} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{crosstab}\PY{p}{(}\PY{n}{index} \PY{o}{=} \PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Neighbourhood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{columns} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{neighborhoods}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 6: Neighborhoods distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total number of observations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x10488eb00>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} <matplotlib.text.Text at 0x10db37748>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} <matplotlib.text.Text at 0x10f6d7828>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The figure above shows the dsitribution of observations per
+neighborhood. The neighborhood of Jardim Camburi stands out the most.
+Without any background information on the neighborhood and the
+historical context when the survey was conducted, the author cannot draw
+any interesting conclusions. Other than that, the most number of people
+came from this area. However, as there is a wealth of information per
+neighborhood. It would be interesting to see how the no-shows have been
+distribtuted across the city
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s see how no\PYZhy{}shows are distributed across the city}
+         \PY{n}{nosho\PYZus{}hood} \PY{o}{=} \PY{n}{nosho}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Neighbourhood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{nosho\PYZus{}hood}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}83}]:}                         Age                                                  \textbackslash{}
+                               count       mean        std   min    25\%   50\%    75\%   
+         Neighbourhood                                                                 
+         AEROPORTO               8.0  53.125000  10.934056  36.0  47.50  58.0  59.75   
+         ANDORINHAS           2136.0  35.813202  22.406783   0.0  17.00  35.0  52.00   
+         ANTÔNIO HONÓRIO       271.0  36.845018  23.606299   0.0  17.00  33.0  53.00   
+         ARIOVALDO FAVALESSA   280.0  32.939286  23.695346   0.0  12.75  29.0  52.00   
+         BARRO VERMELHO        422.0  45.109005  20.092481   0.0  30.00  48.5  60.00   
+         
+                                    Alcoholism           {\ldots}  Scholarship          Yes  \textbackslash{}
+                                max      count      mean {\ldots}          75\%  max   count   
+         Neighbourhood                                   {\ldots}                             
+         AEROPORTO             64.0        8.0  0.000000 {\ldots}          0.0  0.0     8.0   
+         ANDORINHAS           115.0     2136.0  0.022004 {\ldots}          0.0  1.0  2136.0   
+         ANTÔNIO HONÓRIO      100.0      271.0  0.000000 {\ldots}          0.0  1.0   271.0   
+         ARIOVALDO FAVALESSA   97.0      280.0  0.050000 {\ldots}          0.0  1.0   280.0   
+         BARRO VERMELHO        92.0      422.0  0.004739 {\ldots}          0.0  0.0   422.0   
+         
+                                                                           
+                                  mean       std  min  25\%  50\%  75\%  max  
+         Neighbourhood                                                     
+         AEROPORTO            0.125000  0.353553  0.0  0.0  0.0  0.0  1.0  
+         ANDORINHAS           0.221910  0.415628  0.0  0.0  0.0  0.0  1.0  
+         ANTÔNIO HONÓRIO      0.184502  0.388611  0.0  0.0  0.0  0.0  1.0  
+         ARIOVALDO FAVALESSA  0.221429  0.415952  0.0  0.0  0.0  0.0  1.0  
+         BARRO VERMELHO       0.215640  0.411754  0.0  0.0  0.0  0.0  1.0  
+         
+         [5 rows x 104 columns]
+\end{Verbatim}
+            
+    This clearly isn't going to work with the describe function on all the
+columns.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{c+c1}{\PYZsh{}Plot of neighborhood against the mean no\PYZhy{}shows}
+         \PY{n}{nosho\PYZus{}hood}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{,} \PY{n}{stacked} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 7: Attendance and cancellation per neighborhood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Attendance rates}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x103e4cf98>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:} <matplotlib.text.Text at 0x10dd27390>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:} <matplotlib.text.Text at 0x10f6c9160>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The stacked bar graph above shows attendance rates across the city.
+According to this graph above, the neighborhoods look evenly distributed
+when it comes to attendance rates. Of course, there are two exceptions:
+Ilhas Oceanias has 0 attendance while Parque Idnustrial has full
+attendance. These are not errors. Both the neighborhoods only have one
+sample each.
+
+    \subsubsection{Is there any relation between waiting time and
+attendance?}\label{is-there-any-relation-between-waiting-time-and-attendance}
+
+Perhaps the longer someone waits, the more likely the attendance is
+missed? This variable was created because it was, in fact, in the
+original version of the data (version 1: "Awaiting time") and for some
+reason removed in subsequent versions. However, it could be interesting:
+the hypothesis being that the longer the waiting time, the more
+frustrated the patient becomes or more likely they are to forget their
+appointment.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{c+c1}{\PYZsh{} Duration between scheduled day and apointment day}
+         \PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Waiting\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AppointmentDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{n}{nosho}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ScheduledDay}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{nosho}\PY{o}{.}\PY{n}{Waiting\PYZus{}time}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}86}]:} 0     2 days 13:03:19
+         1   -1 days +09:37:02
+         2   -1 days +14:47:31
+         3     2 days 16:46:24
+         4     6 days 16:40:03
+         5     2 days 12:01:42
+         6   -1 days +14:17:53
+         7    20 days 10:22:48
+         8    18 days 16:36:30
+         9    26 days 12:37:45
+         Name: Waiting\_time, dtype: timedelta64[ns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{c+c1}{\PYZsh{} Convert the datetime object to integer for easier manipulation}
+         \PY{n}{nosho}\PY{o}{.}\PY{n}{Waiting\PYZus{}time} \PY{o}{=} \PY{n}{nosho}\PY{o}{.}\PY{n}{Waiting\PYZus{}time}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{days}
+         \PY{n}{nosho}\PY{o}{.}\PY{n}{Waiting\PYZus{}time}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}87}]:} 0     2
+         1    -1
+         2    -1
+         3     2
+         4     6
+         5     2
+         6    -1
+         7    20
+         8    18
+         9    26
+         Name: Waiting\_time, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n}{nosho}\PY{o}{.}\PY{n}{Waiting\PYZus{}time}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+         \PY{n}{nosho}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Waiting\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{vert} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 8: Waiting time box plot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Days}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}88}]:} count    109193.000000
+         mean          9.065746
+         std          15.200463
+         min          -7.000000
+         25\%          -1.000000
+         50\%           3.000000
+         75\%          13.000000
+         max         178.000000
+         Name: Waiting\_time, dtype: float64
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}88}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x10ea3a358>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}88}]:} <matplotlib.text.Text at 0x110026748>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}88}]:} <matplotlib.text.Text at 0x10fb33908>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    According to the figure above, most people only had to wait 9 days for
+an appointment which is actually very efficient. However, it shoudl be
+noted again that since th edata is skewed to the right, the sample size
+is much greater for the shorter duration.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{n}{nosho}\PY{o}{.}\PY{n}{Waiting\PYZus{}time}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Observations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Waiting time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 9: Waiting time distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}89}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x10ee40d68>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}89}]:} <matplotlib.text.Text at 0x10eb36b70>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}89}]:} <matplotlib.text.Text at 0x11001e390>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}89}]:} <matplotlib.text.Text at 0x10ea9c9b0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This is complementary to the boxplot figure above to show skewness.
+Again, it shows a right skewed distribution which we need to take into
+account before jumping to conclusions about impact of waiting time on
+attendance rates
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{nosho}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Waiting\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}92}]:}               Waiting\_time       Yes
+         Waiting\_time      1.000000  0.185291
+         Yes               0.185291  1.000000
+\end{Verbatim}
+            
+    The table above shows that there is no correlation between waiting time
+and attendance. And even if there were, it would be hard to drawn a
+conclusion because the distribution is not even.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{c+c1}{\PYZsh{} does waiting time impact attendance? Even though the correlation table doesn\PYZsq{}t seem to point to anything conclusive}
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ticks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color\PYZus{}codes}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{nosho}\PY{p}{,} \PY{n+nb}{vars}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Waiting\PYZus{}time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No\PYZhy{}show}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 9: Waiting time and age pair plots}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}91}]:} <seaborn.axisgrid.PairGrid at 0x10dd7c7f0>
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}91}]:} <matplotlib.text.Text at 0x111c562e8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_66_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The figure above shows that waiting time and age are not correlated to
+attendance rates. The stacked bar plots clearly show that the no
+attendance rates (in green) although higher in the bottom left, appear
+just as much across the distribution. It must be noted again that the
+high peak in the bottom left is due to the fact that the sample size for
+shorter durations are larger than larger durations. The only conclusion
+that can be drawn from this is that amongst the population, the majority
+of the sample waited around 9 days. But this conclusion cannot be
+generalised for the general population until context of the experiment
+is known.
+
+     \#\# Conclusions
+
+    What factors are important for us to know in order to predict if a
+patient will show up for their scheduled appointment?
+
+Part 1: What factors are highly correlated to outcome?
+
+Before drawing any conclusions, it is important to note that the data is
+very skewed and biased. There are 70\% "shows" compared to "no-shows"
+(Figure 4). This may affect correlation between outcome and variables
+such as Age. If the data is skewed it invariably means that the mean and
+median will be off-centre and this will affect the Pearson coefficient.
+So correlation analysis will not hold up. this will also affect
+prediction analysis later on, although this can be accounted for in
+predictive algorithms and models.
+
+Some key variables are also skewed in the dataset: Age and outcome, for
+example. This may explain why Age is not correlated? On the other hand
+it throws into doubt the method used for correlation. Perhaps another
+correlation method (such as Spearman) should be used for nominal and
+continuous variables? The author is aware that the CHI-sq tests and
+ANOVA are probably better test to use with categorical data however it
+is outside the scope of this project.
+
+More satisfying is the analysis done by grouping the ages (Figure 3). It
+is possible that younger ages (0-18 and 30-45) tend not to show up for
+their appointments. As the ages increase, the no-shows dissapear.
+However, it should also be noted that the sample size for older ages is
+much smaller than for 0-18 and 18-30. So there is a limitation here in
+drawing conclusions.
+
+Other variables have shown no correlation, and therefore further
+analysis nor figures have been produced. For example, there doesn't seem
+to be any suggestion that gender impacted attendance.
+
+The neighborhoods data, although interesintg has not thrown anything
+interesting. Looking at Figure 7, the distribution looks quite even
+across the beighborhoods. Nothing (apart from the two neighborhoods that
+have only one attendance and one cancellation) stand out. It is a pity
+that there is no socio-economic data within the neighborhoods. A future
+analysis could be neighborhoods and membership in the program. This may
+provide some light on the economic status of the neighborhoods. Howeve,r
+it will not shed any further light on whether a patient will show up for
+their appointment or not.
+
+Part 2: Is there any relationship between waiting time and attendance?
+
+The simple answer is "no". From the analysis performed, there is no
+obvious relationship. the mean waiting time is actually 9 days which
+from the author's experience working within the healthcare industry is
+very efficient. however, both no-shows and shows have similar
+distributions over waiting time. this can be seen in the pairplots.
+
+\subsection{Final conclusions}\label{final-conclusions}
+
+The author believes that the wrong question was posed for this dataset.
+It should not (and possibly cannot due to its 70\% bias) be used to
+predict attendance rates. More interesting variables may have helped:
+income and education status of patient, reason for appointment (you
+cannot assume from illness what the reason for the appointment is).
+Although, you could infer that, the more serious the illness and reason
+for appointment, the shorter the waiting time.
+
+A more interesting question would have been "What neighborhood have the
+highest number of chronically ill patients?" or givne more
+socio-economic data per neighborhood, "What impact do income levels have
+with hospital attendance". These questions do not ask for a predictive
+model but can be nevertheless insightful in the way people use
+healthcare.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
